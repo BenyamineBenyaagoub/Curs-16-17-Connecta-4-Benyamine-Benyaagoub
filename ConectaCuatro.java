@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package newpackage;
+package ConectaCuatro;
 
 import java.util.Scanner;
 
-/**
- *
- * @author ibra
- */
 public class ConectaCuatro {
 
     private int tabla[][] = new int[6][7];
@@ -32,12 +23,10 @@ public class ConectaCuatro {
         return tabla[i][j];
 
     }
-  int ficha = 1;
+    int ficha = 1;
 
     void actuar(int x, int i, int y) {
         
-
-
         if (tabla[x + 5][i] == 0) {
             tabla[x + 5][i] = y;
         } else if (tabla[x + 4][i] == 0) {
@@ -51,9 +40,10 @@ public class ConectaCuatro {
         } else if (tabla[x][i] == 0) {
             tabla[x][i] = y;
         }
+        
 
     }
-  
+
     public void tablah() {
         int i;
         int j;
@@ -66,5 +56,148 @@ public class ConectaCuatro {
             System.out.println("");
 
         }
+    }
+
+    private boolean horizontal(int y, int x, int num) {
+
+        for (int i = 0; i < 4; i++) {
+            if (tabla[y][x + i] != num) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean vertical(int y, int x, int num) {
+
+        for (int i = 0; i < 4; i++) {
+            if (tabla[y + i][x] != num) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public boolean victoria(int num) {
+
+        return diagolan(num) || horizontal(num) || vertical(num);
+
+    }
+
+    private boolean horizontal(int num) {
+
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (cHoritz(i, j, num)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean vertical(int num) {
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (cVert(i, j, num)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private boolean cHoritz(int y, int x, int num) {
+
+        for (int i = 0; i < 4; i++) {
+            if (tabla[y][x + i] != num) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean cVert(int y, int x, int num) {
+
+        for (int i = 0; i < 4; i++) {
+            if (tabla[y + i][x] != num) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    private boolean diagolan(int num) {
+
+        return cDiagEsquerra(num) || cDiagDreta(num);
+
+    }
+
+    private boolean cDiagEsquerra(int num) {
+
+        for (int y = 0; y < 3; y++) {
+            for (int x = 0; x < 4; x++) {
+
+                if (diagonalEsquerra(y, x, num)) {
+                    return true;
+                }
+
+            }
+
+        }
+
+        return false;
+
+    }
+
+    private boolean cDiagDreta(int num) {
+
+        for (int y = 0; y < 3; y++) {
+            for (int x = 3; x < 7; x++) {
+
+                if (diagonalDreta(y, x, num)) {
+                    return true;
+                }
+
+            }
+
+        }
+
+        return false;
+
+    }
+
+    private boolean diagonalDreta(int y, int x, int num) {
+
+        for (int i = 0; i < 4; i++) {
+
+            if (tabla[y++][x--] != num) {
+                return false;
+            }
+
+        }
+
+        return true;
+    }
+
+    private boolean diagonalEsquerra(int y, int x, int num) {
+
+        for (int i = 0; i < 4; i++) {
+
+            if (tabla[y++][x++] != num) {
+                return false;
+            }
+
+        }
+
+        return true;
+
     }
 }

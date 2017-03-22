@@ -1,14 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package newpackage;
+package ConectaCuatro;
 
-/**
- *
- * @author ibra
- */
 import java.util.Scanner;
 
 public class Main {
@@ -22,8 +13,9 @@ public class Main {
         c.tablah();
         System.out.println("_____________");
         int turno = 2;
-        while (true) {
-
+        boolean salir = true;
+        while (salir) {
+            int i = 0;
             if (turno == 2) {
                 turno = 1;
             } else {
@@ -33,23 +25,30 @@ public class Main {
             int x = sc.nextInt();
 
             if (x < 7) {
-                int i = 0;
 
                 c.actuar(i, x, turno);
                 System.out.println("0 1 2 3 4 5 6");
                 System.out.println("_____________");
                 c.tablah();
                 System.out.println("_____________");
-            } else {
-                System.out.println("introduce un numero entre 0 y 6");
-                if (turno == 1) {
-                    turno = 2;
-                } else {
-                    turno = 1;
+                if(i < 0){
+                    System.out.println("elige otra columna");
                 }
+                } else {
+                    System.out.println("introduce un numero entre 0 y 6");
+                    if (turno == 1) {
+                        turno = 2;
+                    } else {
+                        turno = 1;
+                    }
+                }
+                if ((c.victoria(turno))) {
+
+                    System.out.println("ha ganado el jugador " + turno);
+                    salir = false;
+                }
+
             }
 
         }
-
     }
-}
